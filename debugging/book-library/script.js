@@ -44,6 +44,7 @@ function submit(event) {
     author.value = "";
     pages.value = "";
     check.checked = false;
+
     render();
   }
 }
