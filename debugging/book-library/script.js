@@ -39,21 +39,22 @@ function submit(event) {
       Number(pages.value),
       check.checked
     ); //makes the page numbering numeric instead of a string.
+
     myLibrary.push(book);
     title.value = "";
     author.value = "";
     pages.value = "";
     check.checked = false;
-
+    console.log(check.checked);
     render();
   }
 }
 
-function Book(title, author, pages, check) {
+function Book(title, author, pages, isRead) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.check = check;
+  this.isRead = isRead;
 }
 
 function render() {
@@ -81,9 +82,9 @@ function render() {
     //add and wait for action for read/unread button
     let changeBut = document.createElement("button");
     changeBut.className = "btn btn-success";
-    changeBut.innerText = myLibrary[index].check ? "Yes" : "No";
+    changeBut.innerText = myLibrary[index].isRead ? "Yes" : "No";
     changeBut.addEventListener("click", function () {
-      myLibrary[index].check = !myLibrary[index].check;
+      myLibrary[index].isRead = !myLibrary[index].isRead;
       render();
     });
     wasReadCell.appendChild(changeBut);
