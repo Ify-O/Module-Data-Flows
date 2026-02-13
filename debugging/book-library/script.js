@@ -33,22 +33,32 @@ function submit(event) {
     alert("Please fill all fields!");
     return false;
   } else {
-    let book = new Book(title.value, author.value, pages.value, check.checked);
+    let book = new Book(
+      title.value,
+      author.value,
+      number(pages.value),
+      check.checked
+    ); //makes tthe page numbering numeric instead of a string.
     myLibrary.push(book);
+    title.value = "";
+    author.value = "";
+    pages.value = "";
+    check.checked = false;
     render();
   }
 }
 
 function Book(title, author, pages, check) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.check = check;
+  title.value = "";
+  author.value = "";
+  pages.value = "";
+  check.checked = false;
 }
 
 function render() {
   let table = document.getElementById("display");
   let rowsNumber = table.rows.length;
+
   //delete old table
   for (let n = rowsNumber - 1; n > 0; n--) {
     table.deleteRow(n);
@@ -70,19 +80,12 @@ function render() {
     //add and wait for action for read/unread button
     let changeBut = document.createElement("button");
     changeBut.className = "btn btn-success";
-    wasReadCell.appendChild(changeBut);
-    let readStatus = "";
-    if (myLibrary[index].check == false) {
-      readStatus = "Yes";
-    } else {
-      readStatus = "No";
-    }
-    changeBut.innerText = readStatus;
-
+    changeBut.innerText = myLibrary[index].check ? "Yes" : "No";
     changeBut.addEventListener("click", function () {
-      myLibrary[index].check = !myLibrary[index].check; // use index, not i
+      myLibrary[index].check = !myLibrary[index].check;
       render();
     });
+    wasReadCell.appendChild(changeBut);
 
     //add delete button to every row and render again
     let delButton = document.createElement("button");
