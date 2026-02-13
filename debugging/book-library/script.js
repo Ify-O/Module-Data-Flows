@@ -36,9 +36,9 @@ function submit(event) {
     let book = new Book(
       title.value,
       author.value,
-      number(pages.value),
+      Number(pages.value),
       check.checked
-    ); //makes tthe page numbering numeric instead of a string.
+    ); //makes the page numbering numeric instead of a string.
     myLibrary.push(book);
     title.value = "";
     author.value = "";
@@ -49,10 +49,10 @@ function submit(event) {
 }
 
 function Book(title, author, pages, check) {
-  title.value = "";
-  author.value = "";
-  pages.value = "";
-  check.checked = false;
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.check = check;
 }
 
 function render() {
