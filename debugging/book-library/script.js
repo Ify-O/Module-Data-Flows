@@ -28,10 +28,10 @@ const check = document.getElementById("check");
 //via Book function and start render function
 function submit() {
   if (
-    title.value == null ||
     title.value == "" ||
-    pages.value == null ||
-    pages.value == ""
+    author.value == "" ||
+    pages.value == "" ||
+    check.checked == false
   ) {
     alert("Please fill all fields!");
     return false;
