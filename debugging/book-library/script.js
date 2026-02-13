@@ -1,7 +1,10 @@
 let myLibrary = [];
 
-window.addEventListener("load", function (e) {
+window.addEventListener("load", function () {
   populateStorage();
+
+  const form = document.getElementById("bookForm");
+  form.addEventListener("submit", submit);
 });
 
 function populateStorage() {
