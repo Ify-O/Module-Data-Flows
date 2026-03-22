@@ -67,25 +67,32 @@ function render() {
     // Read toggle button
     let readCell = row.insertCell(3);
     let readBtn = document.createElement("button");
-    readBtn.className = "btn btn-success btn-sm";
+    readBtn.className = "btn btn-success btn-sm read-btn";
+    readBtn.dataset.index = index; // store index on the button
     readBtn.textContent = book.isRead ? "Yes" : "No";
-    readBtn.addEventListener("click", () => {
-      book.isRead = !book.isRead;
-      render();
-    });
+    
     readCell.appendChild(readBtn);
 
     // Delete button
     let delCell = row.insertCell(4);
     let delBtn = document.createElement("button");
-    delBtn.className = "btn btn-warning btn-sm";
+    delBtn.className = "btn btn-warning btn-sm delete-btn";
     delBtn.textContent = "Delete";
-    delBtn.addEventListener("click", () => {
-      if (confirm(`Delete "${book.title}"?`)) {
-        myLibrary.splice(index, 1);
-        render();
-      }
-    });
+    delBtn.dataset.index = index; // store index on the button
     delCell.appendChild(delBtn);
   });
 }
+
+// Add a single listener for the whole table
+document.querySelector("#display tbody").addEventListener("click", (e) => {
+  const index = e.target.dataset.index;
+  if (e.target.classList.contains("read-btn")) {
+    myLibrary[index].isRead = !myLibrary[index].isRead;
+    render();
+  } else if (e.target.classList.contains("delete-btn")) {
+    if (confirm(`Delete "${myLibrary[index].title}"?`)) {
+      myLibrary.splice(index, 1);
+      render();
+    }
+  }
+});
