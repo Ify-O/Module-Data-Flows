@@ -43,11 +43,13 @@ function submit() {
   }
 }
 
-function Book(title, author, pages, check) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.check = check;
+function Book(title, author, pages, isRead) {
+  return {
+    title,
+    author,
+    pages,
+    isRead
+  };
 }
 
 function render() {
