@@ -21,12 +21,14 @@ function populateStorage() {
   }
 }
 
-// Book constructor
+// Book constructor returning plain object
 function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = isRead;
+  return {
+    title,
+    author,
+    pages,
+    isRead,
+  };
 }
 
 // Submit handler
